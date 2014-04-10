@@ -19,6 +19,7 @@ class WSU_Blocks {
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
 		add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ), 10, 1 );
 		add_action( 'admin_init', array( $this, 'remove_page_editor' ) );
+		add_action( 'save_post', array( $this, 'save_content_blocks' ), 10, 2 );
 	}
 
 	/**
@@ -72,6 +73,32 @@ class WSU_Blocks {
 			<?php wp_editor( '', 'wsublock-hidden-temp' ); ?>
 		</div>
 		<?php
+	}
+
+	public function save_content_blocks( $post_id, $post ) {
+		if ( 'page' !== $post->post_type ) {
+			return;
+		}
+
+		// We want at least one content block to exist before we start saving.
+		if ( empty( $_POST['wsublocks_count'] ) ) {
+			return;
+		}
+
+		$content = '';
+
+		for ( $i = 1; $i <= absint( $_POST['wsublocks_count'] ); $i++ ) {
+			$data = $_POST['wsublock-current-' . $i ]; // save chunks
+			$content .= '
+			<section>
+				' . $data . '
+			</section>'; // save entire thing
+		}
+
+		$post->post_content = $content;
+		remove_action( 'save_post', array( $this, 'save_content_blocks' ), 10 );
+		wp_update_post( $post );
+		add_action( 'save_post', array( $this, 'save_content_blocks' ), 10, 2 );
 	}
 }
 new WSU_Blocks();
