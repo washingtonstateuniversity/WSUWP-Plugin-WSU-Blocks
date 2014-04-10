@@ -46,6 +46,7 @@ class WSU_Blocks {
 	 */
 	public function add_meta_boxes( $post_type ) {
 		add_meta_box( 'wsublocks-add', 'Add Content Block', array( $this, 'display_add_content_block' ), 'page', 'normal', 'default' );
+		add_meta_box( 'wsublocks-current', 'Page Content', array( $this, 'display_current_content_blocks' ), 'page', 'normal', 'default' );
 	}
 
 	/**
@@ -57,6 +58,18 @@ class WSU_Blocks {
 		<div id="add-wsublock-double" class="wsublock-add">Add two even blocks</div>
 		<div id="add-wsublock-triple" class="wsublock-add">Add three even blocks</div>
 		<div class="clear"></div>
+		<?php
+	}
+
+	public function display_current_content_blocks() {
+		?>
+		<div id="wsublock-wrapper"></div>
+		<div id="wsublock-current-1"></div>
+		<div id="wsublock-current-2"></div>
+		<div id="wsublock-current-3"></div>
+		<div id="wsublock-editor-hidden" class="hidden">
+			<?php wp_editor( '', 'wsublock-hidden-temp' ); ?>
+		</div>
 		<?php
 	}
 }
