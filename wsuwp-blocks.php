@@ -48,6 +48,7 @@ class WSU_Blocks {
 		<div id="add-wsublock-single" class="wsublock-add">Add a single wide block</div>
 		<div id="add-wsublock-double" class="wsublock-add">Add two even blocks</div>
 		<div id="add-wsublock-triple" class="wsublock-add">Add three even blocks</div>
+		<div class="clear"></div>
 		<?php
 	}
 }

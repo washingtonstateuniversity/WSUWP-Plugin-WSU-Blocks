@@ -1,0 +1,14 @@
+.wsublock-add {
+	border: 1px solid #ccc;
+	padding: 50px 50px 50px 50px;
+	height: 100px;
+	width: 200px;
+	background: #efefef;
+	float: left;
+	margin-right: 10px;
+}
+
+.wsublock-add:hover {
+	cursor: pointer;
+	background: #d1cbc7;
+}
