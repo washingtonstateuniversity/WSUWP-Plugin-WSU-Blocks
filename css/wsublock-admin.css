@@ -1,8 +1,8 @@
 .wsublock-add {
 	border: 1px solid #ccc;
-	padding: 50px 50px 50px 50px;
+	padding: 50px 0 50px 0;
 	height: 100px;
-	width: 200px;
+	width: 30%;
 	background: #efefef;
 	float: left;
 	margin-right: 10px;
