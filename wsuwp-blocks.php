@@ -9,8 +9,25 @@ Author URI: http://web.wsu.edu
 */
 
 class WSU_Blocks {
+
+	/**
+	 * @var string Used to break cache on scripts and styles.
+	 */
+	var $script_version = '0.0.1';
+
 	public function __construct() {
+		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
 		add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ), 10, 1 );
+	}
+
+	/**
+	 * Enqueue the Javascript and stylesheet used to manage the admin interface
+	 * for content blocks.
+	 */
+	public function admin_enqueue_scripts() {
+		if ( 'post' === get_current_screen()->base && 'page' === get_current_screen()->post_type ) {
+			wp_enqueue_script( 'wsublock-admin', plugins_url( '/js/wsublock-admin.js', __FILE__ ), array( 'jquery' ), $this->script_version, true );
+		}
 	}
 
 	/**
