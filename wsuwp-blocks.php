@@ -63,6 +63,7 @@ class WSU_Blocks {
 
 	public function display_current_content_blocks() {
 		?>
+		<input type="hidden" id="wsublocks-count" name="wsublocks_count" value="0" />
 		<div id="wsublock-wrapper"></div>
 		<div id="wsublock-current-1"></div>
 		<div id="wsublock-current-2"></div>

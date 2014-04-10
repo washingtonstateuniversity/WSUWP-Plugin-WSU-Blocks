@@ -14,17 +14,26 @@
 	var tiny_instance_count = 0;
 
 	/**
+	 * Update the tinyMCE instance count in memory and in the DOM
+	 */
+	updateBoxCount = function() {
+		tiny_instance_count++;
+		$('#wsublocks-count').val( tiny_instance_count );
+	};
+
+	/**
 	 * Process a click on an add content block box.
 	 *
 	 * @param element_id string containing the clicked element.
 	 */
 	handleClick = function( element_id ) {
 		if ( 'add-wsublock-single' === element_id ) {
-			tiny_instance_count++;
+			updateBoxCount();
 			window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count ] = tiny_instance_defaults;
 			window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count ].selector = '#wsublock-current-' + tiny_instance_count;
 			window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count ].body_class = window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count ].body_class.replace( 'wsublock-hidden-temp', 'wsublock-current-' + tiny_instance_count );
 			window.tinymce.init( window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count ] );
+
 		}
 	};
 
