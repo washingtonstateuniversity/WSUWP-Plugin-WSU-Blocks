@@ -18,6 +18,14 @@ class WSU_Blocks {
 	public function __construct() {
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
 		add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ), 10, 1 );
+		add_action( 'admin_init', array( $this, 'remove_page_editor' ) );
+	}
+
+	/**
+	 * Remove support for the default editor instance in pages.
+	 */
+	public function remove_page_editor() {
+		remove_post_type_support('page', 'editor');
 	}
 
 	/**
