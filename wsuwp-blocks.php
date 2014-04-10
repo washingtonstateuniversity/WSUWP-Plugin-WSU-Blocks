@@ -27,6 +27,7 @@ class WSU_Blocks {
 	public function admin_enqueue_scripts() {
 		if ( 'post' === get_current_screen()->base && 'page' === get_current_screen()->post_type ) {
 			wp_enqueue_script( 'wsublock-admin', plugins_url( '/js/wsublock-admin.js', __FILE__ ), array( 'jquery' ), $this->script_version, true );
+			wp_enqueue_style( 'wsublock-admin', plugins_url( '/css/wsublock-admin.css', __FILE__ ), array(), $this->script_version );
 		}
 	}
 
