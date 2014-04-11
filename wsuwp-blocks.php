@@ -138,6 +138,14 @@ class WSU_Blocks {
 		<?php
 	}
 
+	private function get_section_class( $section_type ) {
+		if ( 'single' === $section_type ) {
+			return 'row,single';
+		}
+
+		return 'row';
+	}
+
 	public function save_content_blocks( $post_id, $post ) {
 		if ( 'page' !== $post->post_type ) {
 			return;
@@ -152,11 +160,18 @@ class WSU_Blocks {
 
 		for ( $i = 1; $i <= absint( $_POST['wsublocks_count'] ); $i++ ) {
 			if ( isset( $_POST['wsublock-current-' . $i ] ) ) {
+				if ( isset( $_POST['wsublock-type-' . $i ] ) ) {
+					$classes = $this->get_section_class( $_POST['wsublock-type-' . $i ] );
+				} else {
+					$classes = 'row';
+				}
 				$data = $_POST['wsublock-current-' . $i ]; // save chunks
-				$content .= '<!-- section-' . $i . '-class:row,sidebar,gutter,wide: -->' . $data . '<!-- end-section-' . $i . ' -->'; // save entire thing
+
+				$content .= '<!-- section-' . $i . '-class:' . $classes . ': -->' . $data . '<!-- end-section-' . $i . ' -->'; // save entire thing
+				var_dump( $content );
+
 			}
 		}
-
 		$post->post_content = $content;
 		remove_action( 'save_post', array( $this, 'save_content_blocks' ), 10 );
 		wp_update_post( $post );
