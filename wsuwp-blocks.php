@@ -20,6 +20,35 @@ class WSU_Blocks {
 		add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ), 10, 1 );
 		add_action( 'admin_init', array( $this, 'remove_page_editor' ) );
 		add_action( 'save_post', array( $this, 'save_content_blocks' ), 10, 2 );
+		add_action( 'wp_head', array( $this, 'remove_content_filter' ), 99 );
+	}
+
+	public function remove_content_filter() {
+		// @todo also check if this page supports blocks.
+		if ( is_page() ) {
+			remove_filter( 'the_content', 'wpautop', 10 );
+			add_filter( 'the_content', array( $this, 'spineautop' ), 10 );
+		}
+	}
+
+	public function spineautop( $text ) {
+		$block_count = absint( get_post_meta( get_the_ID(), '_wsuwp_block_count', true ) );
+
+		$final_html = '';
+
+		for ( $i = 1; $i <= $block_count; $i++ ) {
+			// get sections and loop
+			preg_match('/<!-- section-' . $i . '-class:([a-z-,_]+): -->(.*?)<!-- end-section-' . $i . ' -->/s', $text, $matches);
+			if ( isset( $matches[1] ) ) {
+				$classes = explode( ',', esc_attr( $matches[1] ) );
+				$classes = implode( ' ', $classes );
+
+				$section_html = '<section id="section-' . $i . '" class="' . $classes . '">' . wp_unslash( wpautop( $matches[2] ) ) . '</section>';
+				$final_html .= $section_html;
+			}
+		}
+
+		return $final_html;
 	}
 
 	/**
@@ -89,16 +118,14 @@ class WSU_Blocks {
 
 		for ( $i = 1; $i <= absint( $_POST['wsublocks_count'] ); $i++ ) {
 			$data = $_POST['wsublock-current-' . $i ]; // save chunks
-			$content .= '
-			<section>
-				' . $data . '
-			</section>'; // save entire thing
+			$content .= '<!-- section-' . $i . '-class:row,sidebar,gutter,wide: -->' . $data . '<!-- end-section-' . $i . ' -->'; // save entire thing
 		}
 
 		$post->post_content = $content;
 		remove_action( 'save_post', array( $this, 'save_content_blocks' ), 10 );
 		wp_update_post( $post );
 		add_action( 'save_post', array( $this, 'save_content_blocks' ), 10, 2 );
+		update_post_meta( $post_id, '_wsuwp_block_count', $i );
 	}
 }
 new WSU_Blocks();
