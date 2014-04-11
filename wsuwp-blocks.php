@@ -55,14 +55,26 @@ class WSU_Blocks {
 		for ( $i = 1; $i <= $block_count; $i++ ) {
 			// Match the saved content for a specific section in the HTML comments. We look for the section
 			// and then grab the specified classes and content.
-			preg_match('/<!-- section-' . $i . '-class:([a-z-,_]+): -->(.*?)<!-- end-section-' . $i . ' -->/s', $text, $matches);
+			preg_match('/<!-- section-' . $i . '-class:([a-z-,_]+):type:([a-z]+): -->(.*?)<!-- end-section-' . $i . ' -->/s', $text, $matches);
 			if ( isset( $matches[1] ) ) {
 				// Classes are passed in the section comment as comma separated values.
 				$classes = explode( ',', esc_attr( $matches[1] ) );
 				$classes = implode( ' ', $classes );
 
+				$type = $matches[2];
+
 				// @todo explore reasoning and use of wp_unslash
-				$section_html = '<section id="section-' . $i . '" class="' . $classes . '">' . wp_unslash( wpautop( $matches[2] ) ) . '</section>';
+				$section_html = '<section id="section-' . $i . '" class="' . $classes . '">';
+
+				if ( 'single' === $type ) {
+					$section_html .= '<div class="column one">' . wp_unslash( wpautop( $matches[3] ) ) . '</div>';
+				} elseif ( in_array( $type, array( 'sidebar', 'sideleft' ) ) ) {
+					$column_html_parts = explode( '<!-- column-split -->', $matches[3] );
+					$section_html .= '<div class="column one">' . wp_unslash( wpautop( $column_html_parts[0] ) ) . '</div>';
+					$section_html .= '<div class="column two">' . wp_unslash( wpautop( $column_html_parts[1] ) ) . '</div>';
+				}
+
+				$section_html .= '</section>';
 				$final_html .= $section_html;
 			}
 		}
@@ -120,14 +132,14 @@ class WSU_Blocks {
 		for ( $i = 1; $i <= $block_count; $i++ ) {
 			// Match the saved content for a specific section in the HTML comments. We look for the section
 			// and then grab the specified classes and content.
-			preg_match('/<!-- section-' . $i . '-class:([a-z-,_]+): -->(.*?)<!-- end-section-' . $i . ' -->/s', $post->post_content, $matches);
+			preg_match('/<!-- section-' . $i . '-class:([a-z-,_]+):type:([a-z]+): -->(.*?)<!-- end-section-' . $i . ' -->/s', $post->post_content, $matches);
 			if ( isset( $matches[1] ) ) {
 				// Classes are passed in the section comment as comma separated values.
 				$classes = explode( ',', esc_attr( $matches[1] ) );
 				$classes = implode( ' ', $classes );
 
-				echo '<div id="wsublock-current-' . $i . '" class="wsublock-current-container">' . $matches[2] . '</div>';
-				echo '<input type="hidden" name="wsublock-current-' . $i . '" value="' . $matches[2] . '" />';
+				echo '<div id="wsublock-current-' . $i . '" class="wsublock-current-container">' . $matches[3] . '</div>';
+				echo '<input type="hidden" name="wsublock-current-' . $i . '" value="' . $matches[3] . '" />';
 			}
 		}
 		?>
@@ -141,6 +153,10 @@ class WSU_Blocks {
 	private function get_section_class( $section_type ) {
 		if ( 'single' === $section_type ) {
 			return 'row,single';
+		} elseif ( 'sidebar' === $section_type ) {
+			return 'row,sidebar';
+		} elseif ( 'sideleft' === $section_type ) {
+			return 'row,sideleft';
 		}
 
 		return 'row';
