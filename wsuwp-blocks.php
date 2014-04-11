@@ -151,8 +151,10 @@ class WSU_Blocks {
 		$content = '';
 
 		for ( $i = 1; $i <= absint( $_POST['wsublocks_count'] ); $i++ ) {
-			$data = $_POST['wsublock-current-' . $i ]; // save chunks
-			$content .= '<!-- section-' . $i . '-class:row,sidebar,gutter,wide: -->' . $data . '<!-- end-section-' . $i . ' -->'; // save entire thing
+			if ( isset( $_POST['wsublock-current-' . $i ] ) ) {
+				$data = $_POST['wsublock-current-' . $i ]; // save chunks
+				$content .= '<!-- section-' . $i . '-class:row,sidebar,gutter,wide: -->' . $data . '<!-- end-section-' . $i . ' -->'; // save entire thing
+			}
 		}
 
 		$post->post_content = $content;
