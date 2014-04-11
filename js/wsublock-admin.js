@@ -34,7 +34,6 @@
 			window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count ].selector = '#wsublock-current-' + tiny_instance_count;
 			window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count ].body_class = window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count ].body_class.replace( 'wsublock-hidden-temp', 'wsublock-current-' + tiny_instance_count );
 			window.tinymce.init( window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count ] );
-
 		}
 	};
 

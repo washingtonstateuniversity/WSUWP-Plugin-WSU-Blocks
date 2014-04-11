@@ -12,3 +12,8 @@
 	cursor: pointer;
 	background: #d1cbc7;
 }
+
+#wsublock-wrapper .mce-tinymce {
+	border: 1px solid #eee;
+	margin-top: 10px;
+}
