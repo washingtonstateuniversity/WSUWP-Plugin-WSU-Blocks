@@ -43,5 +43,6 @@
 	$(document ).ready( function(){
 		// Capture the defaults from a hidden tinyMCE instance for reuse.
 		tiny_instance_defaults = window.tinyMCEPreInit.mceInit['wsublock-hidden-temp'];
+		tiny_instance_count = $('#wsublocks-count' ).val();
 	})
 }(jQuery));
