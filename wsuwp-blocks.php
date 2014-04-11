@@ -110,10 +110,27 @@ class WSU_Blocks {
 		<?php
 	}
 
-	public function display_current_content_blocks() {
+	public function display_current_content_blocks( $post ) {
+		$block_count = absint( get_post_meta( $post->ID, '_wsuwp_block_count', true ) );
+
 		?>
-		<input type="hidden" id="wsublocks-count" name="wsublocks_count" value="0" />
-		<div id="wsublock-wrapper"></div>
+		<input type="hidden" id="wsublocks-count" name="wsublocks_count" value="<?php echo $block_count; ?>" />
+		<div id="wsublock-wrapper">
+		<?php
+		for ( $i = 1; $i <= $block_count; $i++ ) {
+			// Match the saved content for a specific section in the HTML comments. We look for the section
+			// and then grab the specified classes and content.
+			preg_match('/<!-- section-' . $i . '-class:([a-z-,_]+): -->(.*?)<!-- end-section-' . $i . ' -->/s', $post->post_content, $matches);
+			if ( isset( $matches[1] ) ) {
+				// Classes are passed in the section comment as comma separated values.
+				$classes = explode( ',', esc_attr( $matches[1] ) );
+				$classes = implode( ' ', $classes );
+
+				echo '<div id="wsublock-current-' . $i . '">' . $matches[2] . '</div>';
+			}
+		}
+		?>
+		</div>
 		<div id="wsublock-editor-hidden" class="hidden">
 			<?php wp_editor( '', 'wsublock-hidden-temp' ); ?>
 		</div>
