@@ -146,6 +146,13 @@ class WSU_Blocks {
 		return 'row';
 	}
 
+	/**
+	 * Process the section data added through WSU Blocks before saving the
+	 * post content to the database.
+	 *
+	 * @param int     $post_id ID of the post being saved.
+	 * @param WP_Post $post    Post object being saved.
+	 */
 	public function save_content_blocks( $post_id, $post ) {
 		if ( 'page' !== $post->post_type ) {
 			return;
