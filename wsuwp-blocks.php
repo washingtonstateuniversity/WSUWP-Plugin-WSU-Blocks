@@ -15,6 +15,9 @@ class WSU_Blocks {
 	 */
 	var $script_version = '0.0.1';
 
+	/**
+	 * Add hooks on boot.
+	 */
 	public function __construct() {
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
 		add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ), 10, 1 );
@@ -23,6 +26,10 @@ class WSU_Blocks {
 		add_action( 'wp_head', array( $this, 'remove_content_filter' ), 99 );
 	}
 
+	/**
+	 * Remove the wpautop filter added by WordPress when a WSU Block page is loaded
+	 * and replace it with a filtering function of our own.
+	 */
 	public function remove_content_filter() {
 		// @todo also check if this page supports blocks.
 		if ( is_page() ) {
@@ -31,6 +38,15 @@ class WSU_Blocks {
 		}
 	}
 
+	/**
+	 * Content created with WSU Blocks uses <section> elements that are described
+	 * through HTML comments. This function augments the functionality provided
+	 * by WordPress's wpautop.
+	 *
+	 * @param string $text Current `the_content` text being displayed.
+	 *
+	 * @return string Modified `the_content` text.
+	 */
 	public function spineautop( $text ) {
 		$block_count = absint( get_post_meta( get_the_ID(), '_wsuwp_block_count', true ) );
 
