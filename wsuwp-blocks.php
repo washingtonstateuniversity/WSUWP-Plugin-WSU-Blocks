@@ -115,9 +115,9 @@ class WSU_Blocks {
 	 */
 	public function display_add_content_block() {
 		?>
-		<div id="add-wsublock-single" class="wsublock-add">Add a single wide block</div>
-		<div id="add-wsublock-double" class="wsublock-add">Add two even blocks</div>
-		<div id="add-wsublock-triple" class="wsublock-add">Add three even blocks</div>
+		<div id="add-wsublock-single" class="wsublock-add">Add single section</div>
+		<div id="add-wsublock-sidebar" class="wsublock-add">Add sidebar section</div>
+		<div id="add-wsublock-sideleft" class="wsublock-add">Add sideleft section</div>
 		<div class="clear"></div>
 		<?php
 	}
