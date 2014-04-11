@@ -29,6 +29,7 @@
 	handleClick = function( element_id ) {
 		if ( 'add-wsublock-single' === element_id ) {
 			updateBoxCount();
+			$('#wsublock-wrapper' ).append('<div id="wsublock-current-' + tiny_instance_count + '"></div>');
 			window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count ] = tiny_instance_defaults;
 			window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count ].selector = '#wsublock-current-' + tiny_instance_count;
 			window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count ].body_class = window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count ].body_class.replace( 'wsublock-hidden-temp', 'wsublock-current-' + tiny_instance_count );

@@ -95,9 +95,6 @@ class WSU_Blocks {
 		?>
 		<input type="hidden" id="wsublocks-count" name="wsublocks_count" value="0" />
 		<div id="wsublock-wrapper"></div>
-		<div id="wsublock-current-1"></div>
-		<div id="wsublock-current-2"></div>
-		<div id="wsublock-current-3"></div>
 		<div id="wsublock-editor-hidden" class="hidden">
 			<?php wp_editor( '', 'wsublock-hidden-temp' ); ?>
 		</div>
