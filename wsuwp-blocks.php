@@ -126,7 +126,7 @@ class WSU_Blocks {
 				$classes = explode( ',', esc_attr( $matches[1] ) );
 				$classes = implode( ' ', $classes );
 
-				echo '<div id="wsublock-current-' . $i . '">' . $matches[2] . '</div>';
+				echo '<div id="wsublock-current-' . $i . '" class="wsublock-current-container">' . $matches[2] . '</div>';
 				echo '<input type="hidden" name="wsublock-current-' . $i . '" value="' . $matches[2] . '" />';
 			}
 		}

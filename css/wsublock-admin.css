@@ -17,3 +17,10 @@
 	border: 1px solid #eee;
 	margin-top: 10px;
 }
+
+.wsublock-current-container {
+	width: 100%;
+	border: 1px solid #eee;
+	margin-bottom: 10px;
+	padding: 10px 0 10px 0;
+}
