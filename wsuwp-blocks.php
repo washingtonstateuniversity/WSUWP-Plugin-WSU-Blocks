@@ -37,12 +37,15 @@ class WSU_Blocks {
 		$final_html = '';
 
 		for ( $i = 1; $i <= $block_count; $i++ ) {
-			// get sections and loop
+			// Match the saved content for a specific section in the HTML comments. We look for the section
+			// and then grab the specified classes and content.
 			preg_match('/<!-- section-' . $i . '-class:([a-z-,_]+): -->(.*?)<!-- end-section-' . $i . ' -->/s', $text, $matches);
 			if ( isset( $matches[1] ) ) {
+				// Classes are passed in the section comment as comma separated values.
 				$classes = explode( ',', esc_attr( $matches[1] ) );
 				$classes = implode( ' ', $classes );
 
+				// @todo explore reasoning and use of wp_unslash
 				$section_html = '<section id="section-' . $i . '" class="' . $classes . '">' . wp_unslash( wpautop( $matches[2] ) ) . '</section>';
 				$final_html .= $section_html;
 			}
