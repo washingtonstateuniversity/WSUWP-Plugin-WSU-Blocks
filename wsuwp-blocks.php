@@ -182,17 +182,25 @@ class WSU_Blocks {
 		$content = '';
 
 		for ( $i = 1; $i <= absint( $_POST['wsublocks_count'] ); $i++ ) {
+			// @todo need to check for block type just in case -a and -b are there
 			if ( isset( $_POST['wsublock-current-' . $i ] ) ) {
 				if ( isset( $_POST['wsublock-type-' . $i ] ) ) {
 					$classes = $this->get_section_class( $_POST['wsublock-type-' . $i ] );
+					$type = sanitize_key( $_POST['wsublock-type-' . $i ] );
 				} else {
 					$classes = 'row';
+					$type = 'single';
 				}
-				$data = $_POST['wsublock-current-' . $i ]; // save chunks
 
-				$content .= '<!-- section-' . $i . '-class:' . $classes . ': -->' . $data . '<!-- end-section-' . $i . ' -->'; // save entire thing
-				var_dump( $content );
+				if ( 'single' === $type ) {
+					$data = $_POST['wsublock-current-' . $i ]; // save chunks
+				} else {
+					$data_a = $_POST['wsublock-current-' . $i . '-a' ];
+					$data_b = $_POST['wsublock-current-' . $i . '-b' ];
+					$data = $data_a . ' <!-- column-split -->' . $data_b;
+				}
 
+				$content .= '<!-- section-' . $i . '-class:' . $classes . ':type:' . $type . ': -->' . $data . '<!-- end-section-' . $i . ' -->'; // save entire thing
 			}
 		}
 		$post->post_content = $content;
