@@ -55,7 +55,7 @@
 			window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count + '-b' ].body_class = window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count + '-b' ].body_class.replace( 'wsublock-hidden-temp', 'wsublock-current-' + tiny_instance_count + '-b' );
 			window.tinymce.init( window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count + '-b' ] );
 
-			$wsublock_wrapper.append('<input type="hidden" name="wsublock-type-' + tiny_instance_count + '-a" value="sidebar">');
+			$wsublock_wrapper.append('<input type="hidden" name="wsublock-type-' + tiny_instance_count + '" value="sidebar">');
 		}
 	};
 
