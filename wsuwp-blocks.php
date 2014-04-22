@@ -118,6 +118,7 @@ class WSU_Blocks {
 		<div id="add-wsublock-single" class="wsublock-add">Add single section</div>
 		<div id="add-wsublock-sidebar" class="wsublock-add">Add sidebar section</div>
 		<div id="add-wsublock-sideleft" class="wsublock-add">Add sideleft section</div>
+		<div id="add-wsublock-halves" class="wsublock-add">Add halves section</div>
 		<div class="clear"></div>
 		<?php
 	}

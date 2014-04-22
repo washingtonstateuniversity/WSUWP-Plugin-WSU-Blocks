@@ -56,6 +56,40 @@
 			window.tinymce.init( window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count + '-b' ] );
 
 			$wsublock_wrapper.append('<input type="hidden" name="wsublock-type-' + tiny_instance_count + '" value="sidebar">');
+		} else if ( 'add-wsublock-sideleft' === element_id ) {
+			$wsublock_wrapper.append('<div class="wsublock-sideleft-container">' +
+				'<div id="wsublock-current-' + tiny_instance_count + '-a" class="wsublock-current-container-sideleft"></div>' +
+				'<div id="wsublock-current-' + tiny_instance_count + '-b" class="wsublock-current-container-sideleft"></div>' +
+				'<div class="clear"></div></div>');
+
+			window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count + '-a' ] = tiny_instance_defaults;
+			window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count + '-a' ].selector = '#wsublock-current-' + tiny_instance_count + '-a';
+			window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count + '-a' ].body_class = window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count + '-a' ].body_class.replace( 'wsublock-hidden-temp', 'wsublock-current-' + tiny_instance_count + '-a' );
+			window.tinymce.init( window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count + '-a' ] );
+
+			window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count + '-b' ] = tiny_instance_defaults;
+			window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count + '-b' ].selector = '#wsublock-current-' + tiny_instance_count + '-b';
+			window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count + '-b' ].body_class = window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count + '-b' ].body_class.replace( 'wsublock-hidden-temp', 'wsublock-current-' + tiny_instance_count + '-b' );
+			window.tinymce.init( window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count + '-b' ] );
+
+			$wsublock_wrapper.append('<input type="hidden" name="wsublock-type-' + tiny_instance_count + '" value="sideleft">');
+		} else if ( 'add-wsublock-halves' === element_id ) {
+			$wsublock_wrapper.append('<div class="wsublock-halves-container">' +
+				'<div id="wsublock-current-' + tiny_instance_count + '-a" class="wsublock-current-container-halves"></div>' +
+				'<div id="wsublock-current-' + tiny_instance_count + '-b" class="wsublock-current-container-halves"></div>' +
+				'<div class="clear"></div></div>');
+
+			window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count + '-a' ] = tiny_instance_defaults;
+			window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count + '-a' ].selector = '#wsublock-current-' + tiny_instance_count + '-a';
+			window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count + '-a' ].body_class = window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count + '-a' ].body_class.replace( 'wsublock-hidden-temp', 'wsublock-current-' + tiny_instance_count + '-a' );
+			window.tinymce.init( window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count + '-a' ] );
+
+			window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count + '-b' ] = tiny_instance_defaults;
+			window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count + '-b' ].selector = '#wsublock-current-' + tiny_instance_count + '-b';
+			window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count + '-b' ].body_class = window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count + '-b' ].body_class.replace( 'wsublock-hidden-temp', 'wsublock-current-' + tiny_instance_count + '-b' );
+			window.tinymce.init( window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count + '-b' ] );
+
+			$wsublock_wrapper.append('<input type="hidden" name="wsublock-type-' + tiny_instance_count + '" value="havles">');
 		}
 	};
 
