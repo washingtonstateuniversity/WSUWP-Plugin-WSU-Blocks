@@ -22,6 +22,19 @@
 	};
 
 	/**
+	 * Display a tinyMCE editor instance. When requested, label the instance with
+	 * a segment.
+	 *
+	 * @param segment A segment to display. Should be '', '-a', or '-b'
+	 */
+	displayBlock = function( segment ) {
+		window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count + segment ] = tiny_instance_defaults;
+		window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count + segment ].selector = '#wsublock-current-' + tiny_instance_count + segment;
+		window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count + segment ].body_class = window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count + segment ].body_class.replace( 'wsublock-hidden-temp', 'wsublock-current-' + tiny_instance_count + segment );
+		window.tinymce.init( window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count + segment ] );
+	};
+
+	/**
 	 * Process a click on an add content block box.
 	 *
 	 * @param element_id string containing the clicked element.
@@ -33,10 +46,7 @@
 		if ( 'add-wsublock-single' === element_id ) {
 			$wsublock_wrapper.append('<div id="wsublock-current-' + tiny_instance_count + '" class="wsublock-current-container"></div>');
 
-			window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count ] = tiny_instance_defaults;
-			window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count ].selector = '#wsublock-current-' + tiny_instance_count;
-			window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count ].body_class = window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count ].body_class.replace( 'wsublock-hidden-temp', 'wsublock-current-' + tiny_instance_count );
-			window.tinymce.init( window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count ] );
+			displayBlock( '' );
 
 			$wsublock_wrapper.append('<input type="hidden" name="wsublock-type-' + tiny_instance_count + '" value="single">');
 		} else if ( 'add-wsublock-sidebar' === element_id ) {
@@ -45,15 +55,8 @@
 				'<div id="wsublock-current-' + tiny_instance_count + '-b" class="wsublock-current-container-sidebar"></div>' +
 				'<div class="clear"></div></div>');
 
-			window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count + '-a' ] = tiny_instance_defaults;
-			window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count + '-a' ].selector = '#wsublock-current-' + tiny_instance_count + '-a';
-			window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count + '-a' ].body_class = window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count + '-a' ].body_class.replace( 'wsublock-hidden-temp', 'wsublock-current-' + tiny_instance_count + '-a' );
-			window.tinymce.init( window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count + '-a' ] );
-
-			window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count + '-b' ] = tiny_instance_defaults;
-			window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count + '-b' ].selector = '#wsublock-current-' + tiny_instance_count + '-b';
-			window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count + '-b' ].body_class = window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count + '-b' ].body_class.replace( 'wsublock-hidden-temp', 'wsublock-current-' + tiny_instance_count + '-b' );
-			window.tinymce.init( window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count + '-b' ] );
+			displayBlock( '-a' );
+			displayBlock( '-b' );
 
 			$wsublock_wrapper.append('<input type="hidden" name="wsublock-type-' + tiny_instance_count + '" value="sidebar">');
 		} else if ( 'add-wsublock-sideleft' === element_id ) {
@@ -62,15 +65,8 @@
 				'<div id="wsublock-current-' + tiny_instance_count + '-b" class="wsublock-current-container-sideleft"></div>' +
 				'<div class="clear"></div></div>');
 
-			window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count + '-a' ] = tiny_instance_defaults;
-			window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count + '-a' ].selector = '#wsublock-current-' + tiny_instance_count + '-a';
-			window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count + '-a' ].body_class = window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count + '-a' ].body_class.replace( 'wsublock-hidden-temp', 'wsublock-current-' + tiny_instance_count + '-a' );
-			window.tinymce.init( window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count + '-a' ] );
-
-			window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count + '-b' ] = tiny_instance_defaults;
-			window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count + '-b' ].selector = '#wsublock-current-' + tiny_instance_count + '-b';
-			window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count + '-b' ].body_class = window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count + '-b' ].body_class.replace( 'wsublock-hidden-temp', 'wsublock-current-' + tiny_instance_count + '-b' );
-			window.tinymce.init( window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count + '-b' ] );
+			displayBlock( '-a' );
+			displayBlock( '-b' );
 
 			$wsublock_wrapper.append('<input type="hidden" name="wsublock-type-' + tiny_instance_count + '" value="sideleft">');
 		} else if ( 'add-wsublock-halves' === element_id ) {
@@ -79,15 +75,8 @@
 				'<div id="wsublock-current-' + tiny_instance_count + '-b" class="wsublock-current-container-halves"></div>' +
 				'<div class="clear"></div></div>');
 
-			window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count + '-a' ] = tiny_instance_defaults;
-			window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count + '-a' ].selector = '#wsublock-current-' + tiny_instance_count + '-a';
-			window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count + '-a' ].body_class = window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count + '-a' ].body_class.replace( 'wsublock-hidden-temp', 'wsublock-current-' + tiny_instance_count + '-a' );
-			window.tinymce.init( window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count + '-a' ] );
-
-			window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count + '-b' ] = tiny_instance_defaults;
-			window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count + '-b' ].selector = '#wsublock-current-' + tiny_instance_count + '-b';
-			window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count + '-b' ].body_class = window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count + '-b' ].body_class.replace( 'wsublock-hidden-temp', 'wsublock-current-' + tiny_instance_count + '-b' );
-			window.tinymce.init( window.tinyMCEPreInit.mceInit['wsublock-current-' + tiny_instance_count + '-b' ] );
+			displayBlock( '-a' );
+			displayBlock( '-b' );
 
 			$wsublock_wrapper.append('<input type="hidden" name="wsublock-type-' + tiny_instance_count + '" value="havles">');
 		}
