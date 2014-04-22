@@ -157,6 +157,8 @@ class WSU_Blocks {
 			return 'row,sidebar';
 		} elseif ( 'sideleft' === $section_type ) {
 			return 'row,sideleft';
+		} elseif ( 'halves' === $section_type ) {
+			return 'row,halves';
 		}
 
 		return 'row';
