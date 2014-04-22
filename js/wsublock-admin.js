@@ -78,7 +78,7 @@
 			displayBlock( '-a' );
 			displayBlock( '-b' );
 
-			$wsublock_wrapper.append('<input type="hidden" name="wsublock-type-' + tiny_instance_count + '" value="havles">');
+			$wsublock_wrapper.append('<input type="hidden" name="wsublock-type-' + tiny_instance_count + '" value="halves">');
 		}
 	};
 

@@ -68,7 +68,7 @@ class WSU_Blocks {
 
 				if ( 'single' === $type ) {
 					$section_html .= '<div class="column one">' . wp_unslash( wpautop( $matches[3] ) ) . '</div>';
-				} elseif ( in_array( $type, array( 'sidebar', 'sideleft' ) ) ) {
+				} elseif ( in_array( $type, array( 'sidebar', 'sideleft', 'halves' ) ) ) {
 					$column_html_parts = explode( '<!-- column-split -->', $matches[3] );
 					$section_html .= '<div class="column one">' . wp_unslash( wpautop( $column_html_parts[0] ) ) . '</div>';
 					$section_html .= '<div class="column two">' . wp_unslash( wpautop( $column_html_parts[1] ) ) . '</div>';
