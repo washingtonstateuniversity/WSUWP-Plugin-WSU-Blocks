@@ -135,8 +135,11 @@ class WSU_Blocks {
 			// and then grab the specified classes and content.
 			preg_match('/<!-- section-' . $i . '-class:([a-z-,_]+):type:([a-z]+): -->(.*?)<!-- end-section-' . $i . ' -->/s', $post->post_content, $matches);
 			if ( isset( $matches[1] ) ) {
-				echo '<div id="wsublock-current-' . $i . '" class="wsublock-current-container">' . $matches[3] . '</div>';
+				echo '<div id="wsublock-current-' . $i . '" class="wsublock-current-container">';
+				wp_editor( $matches[3], 'wsublock-mce-current-' . $i );
+				echo '</div>';
 				echo '<input type="hidden" name="wsublock-current-' . $i . '" value="' . $matches[3] . '" />';
+				echo '<div class="clear"></div>';
 			}
 		}
 		?>
