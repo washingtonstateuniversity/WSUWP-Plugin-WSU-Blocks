@@ -1,0 +1,34 @@
+.wsublock-add {
+	border: 1px solid #ccc;
+	padding: 50px 0 50px 0;
+	height: 100px;
+	width: 22%;
+	background: #efefef;
+	float: left;
+	margin-right: 10px;
+}
+
+.wsublock-add:hover {
+	cursor: pointer;
+	background: #d1cbc7;
+}
+
+#wsublock-wrapper .mce-tinymce {
+	border: 1px solid #eee;
+	margin-top: 10px;
+}
+
+.wsublock-current-container {
+	float: left;
+	width: 100%;
+	margin-bottom: 10px;
+	padding: 10px 0 10px 0;
+}
+
+.wsublock-sidebar-container .mce-tinymce,
+.wsublock-sideleft-container .mce-tinymce,
+.wsublock-halves-container .mce-tinymce {
+	width: 48%;
+	margin-right: 15px;
+	float: left;
+}
